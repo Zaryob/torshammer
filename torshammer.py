@@ -181,12 +181,8 @@ if __name__ == "__main__":
     print " *"+term.RED + " Tor's Hammer "+term.NORMAL
     print " * Slow POST DoS Testing Tool"
     print " * Version 1.0 Beta"
+    print " * Python 3 port from Zaryob"
     print " * Anon-ymized via Tor"
-    print " * We are Anonymous."
-    print " * We are Legion."
-    print " * We do not forgive."
-    print " * We do not forget."
-    print " * Expect us!"
     print " */\n"
 
     main(sys.argv[1:])
