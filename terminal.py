@@ -108,11 +108,11 @@ class TerminalController:
         # Colors
         set_fg = self._tigetstr('setf')
         if set_fg:
-            for i,color in zip(range(len(self._COLORS)), self._COLORS):
+            for i,color in zip(list(range(len(self._COLORS))), self._COLORS):
                 setattr(self, color, curses.tparm(set_fg, i) or '')
         set_bg = self._tigetstr('setb')
         if set_bg:
-            for i,color in zip(range(len(self._COLORS)), self._COLORS):
+            for i,color in zip(list(range(len(self._COLORS))), self._COLORS):
                 setattr(self, 'BG_'+color, curses.tparm(set_bg, i) or '')
 
     def _tigetstr(self, cap_name):
@@ -120,8 +120,8 @@ class TerminalController:
         # For any modern terminal, we should be able to just ignore
         # these, so strip them out.
         import curses
-        cap = curses.tigetstr(cap_name) or ''
-        return re.sub(r'\$<\d+>[/*]?', '', cap)
+        cap = curses.tigetstr(cap_name) or b''
+        return (re.sub(rb'\$<\d+>[/*]?', b'', cap)).decode("utf-8")
 
     def render(self, template):
         """
