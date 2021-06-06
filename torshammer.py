@@ -96,7 +96,6 @@ class httpPost(Thread):
                 try:
                     if self.tor:     
                         self.socks.setproxy(socks.PROXY_TYPE_SOCKS5, "127.0.0.1", 9050)
-                    self.socks.connect((self.host, self.port))
                     print(term.BOL+term.UP+term.CLEAR_EOL+"Connected to host..."+ term.NORMAL)
                     break
                 except Exception as e:
@@ -108,7 +107,9 @@ class httpPost(Thread):
 	
             while self.running:
                 try:
+                    # self.socks.connect((self.host, self.port))
                     self._send_http_post()
+                    print("Connection established.")
                 except Exception as e:
                     if e.args[0] == 32 or e.args[0] == 104:
                         print(term.BOL+term.UP+term.CLEAR_EOL+"Thread broken, restarting..."+ term.NORMAL)
