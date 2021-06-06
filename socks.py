@@ -122,8 +122,8 @@ class socksocket(socket.socket):
 	you must specify family=AF_INET, type=SOCK_STREAM and proto=0.
 	"""
 	
-	def __init__(self, family=socket.AF_INET, type=socket.SOCK_STREAM, proto=0, _sock=None):
-		_orgsocket.__init__(self,family,type,proto,_sock)
+	def __init__(self, family=socket.AF_INET, stype=socket.SOCK_STREAM, proto=0, _sock=None):
+		_orgsocket.__init__(self,family, stype,proto,_sock)
 		if _defaultproxy != None:
 			self.__proxy = _defaultproxy
 		else:

