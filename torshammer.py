@@ -66,7 +66,7 @@ class httpPost(Thread):
 		
     def _send_http_post(self, pause=10):
         global stop_now
-        # self.socks.connect((self.host, self.port))
+        self.socks.connect((self.host, self.port))
         post= str(
                  "POST / HTTP/1.1\r\n"
                  "Host: %s\r\n"
@@ -107,9 +107,7 @@ class httpPost(Thread):
 	
             while self.running:
                 try:
-                    # self.socks.connect((self.host, self.port))
                     self._send_http_post()
-                    print("Connection established.")
                 except Exception as e:
                     if e.args[0] == 32 or e.args[0] == 104:
                         print(term.BOL+term.UP+term.CLEAR_EOL+"Thread broken, restarting..."+ term.NORMAL)
