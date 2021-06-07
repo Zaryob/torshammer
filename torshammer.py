@@ -66,7 +66,7 @@ class httpPost(Thread):
 		
     def _send_http_post(self, pause=10):
         global stop_now
-        self.socks.connect((self.host, self.port))
+        # self.socks.connect((self.host, self.port))
         post= str(
                  "POST / HTTP/1.1\r\n"
                  "Host: %s\r\n"
@@ -83,9 +83,9 @@ class httpPost(Thread):
             if stop_now:
                 self.running = False
                 break
-            p = random.choice(string.letters+string.digits)
+            p = random.choice(string.ascii_letters+string.digits)
             print(term.BOL+term.UP+term.CLEAR_EOL+"Posting: %s" % p+term.NORMAL)
-            self.socks.send(p)
+            self.socks.send(bytes(p.encode("utf-8")))
             time.sleep(random.uniform(0.1, 3))
 	
         self.socks.close()
